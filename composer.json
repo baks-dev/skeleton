@@ -20,7 +20,7 @@
     "doctrine/dbal": "^4.0",
     "doctrine/orm": "^3.2",
     "baks-dev/core": "^7.1",
-    "symfony/flex": "^2",
+    "symfony/flex": "^2"
 
   },
   "flex-require": {
