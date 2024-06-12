@@ -34,7 +34,6 @@
     "symfony/scheduler": "*",
     "symfony/messenger": "*",
     "symfony/console": "*",
-    "symfony/security": "*",
     "symfony/translation": "*",
     "symfony/twig-bundle": "*",
     "symfony/test-pack": "*",
