@@ -6,8 +6,8 @@ use Symfony\Config\FrameworkConfig;
 
 return static function (FrameworkConfig $config)
 {
-    $cache = $config->cache();
-
+    /** Конфигурация кеширования в Redis */
+//    $cache = $config->cache();
 
 //    $cache
 //        ->app('cache.adapter.redis')
@@ -19,10 +19,5 @@ return static function (FrameworkConfig $config)
 //        ->system('cache.adapter.redis')
 //    ;
 
-
-    $cache
-        ->pool('cache.app')
-        ->adapters(['cache.adapter.apcu'])
-    ;
 
 };
