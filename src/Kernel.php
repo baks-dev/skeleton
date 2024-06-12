@@ -34,7 +34,6 @@ class Kernel extends BaseKernel
         parent::__construct($environment, $debug);
 
         $Ru = new Ru();
-        //$En = new En();
         $LocaleDisable = new LocaleDisable();
 
         self::$test = $environment === 'test';
@@ -287,6 +286,12 @@ class Kernel extends BaseKernel
         return $collection;
     }
 
+    public function boot(): void
+    {
+        date_default_timezone_set($this->getContainer()->getParameter('timezone'));
+        parent::boot();
+    }
+
 
     /**
      * Метод рекурсивно сканирует директории в поиске папки /Resources/config.
@@ -329,4 +334,6 @@ class Kernel extends BaseKernel
     {
         return self::$test;
     }
+
+
 }
