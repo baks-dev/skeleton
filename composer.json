@@ -36,7 +36,8 @@
     "symfony/security-bundle": "*",
     "symfony/http-client": "*",
     "symfony/mailer": "*",
-    "doctrine/doctrine-migrations-bundle": "*"
+    "doctrine/doctrine-migrations-bundle": "*",
+    "symfony/monolog-bundle": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "9.6"
