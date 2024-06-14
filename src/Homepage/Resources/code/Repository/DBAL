@@ -1,0 +1,42 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+#end
+
+use BaksDev\Core\Doctrine\DBALQueryBuilder;
+
+#set( $interface = $NAME.replace("Repository", "") )
+
+interface ${interface}Interface
+{
+    public function findAll${NAME}() : array|bool;
+}
+
+final class ${NAME} implements ${interface}Interface
+{
+    private DBALQueryBuilder ${DS}DBALQueryBuilder;
+
+    public function __construct(
+        DBALQueryBuilder ${DS}DBALQueryBuilder,
+    )
+    {
+        ${DS}this->DBALQueryBuilder = ${DS}DBALQueryBuilder;
+    }
+
+
+    public function findAll${NAME}() : array|bool
+    {
+        ${DS}dbal = ${DS}this->DBALQueryBuilder->createQueryBuilder(self::class);
+
+        //${DS}dbal->select('id');
+        //${DS}dbal->from(ClasssName::class, 'aliace');
+
+        return ${DS}dbal
+        // ->enableCache('Namespace', 3600)
+        ->fetchAllAssociative();
+    }
+}

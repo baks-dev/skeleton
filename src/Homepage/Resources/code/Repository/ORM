@@ -1,0 +1,37 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+#end
+
+use BaksDev\Core\Doctrine\ORMQueryBuilder;
+
+#set( $interface = $NAME.replace("Repository", "") )
+
+interface ${interface}Interface
+{
+    public function get();
+}
+
+final class ${NAME} implements ${interface}Interface
+{
+	private ORMQueryBuilder ${DS}ORMQueryBuilder;
+
+    public function __construct(ORMQueryBuilder ${DS}ORMQueryBuilder) {
+        ${DS}this->ORMQueryBuilder = ${DS}ORMQueryBuilder;
+    }
+
+    public function get()
+    {
+        ${DS}qb = ${DS}this->ORMQueryBuilder->createQueryBuilder(self::class);
+
+        //${DS}qb->select('alias');
+        //${DS}qb->from(Class::class, 'alias');
+        //${DS}qb->where('*');
+
+        return ${DS}qb->getQuery()->getResult();
+    }
+}
