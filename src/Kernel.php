@@ -10,7 +10,6 @@ use ReflectionFunction;
 use ReflectionMethod;
 use ReflectionNamedType;
 use ReflectionObject;
-use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\AbstractConfigurator;
@@ -21,8 +20,6 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 use Symfony\Component\Routing\Loader\PhpFileLoader as RoutingPhpFileLoader;
 use Symfony\Component\Routing\RouteCollection;
-use function dirname;
-use function is_array;
 
 class Kernel extends BaseKernel
 {
@@ -45,8 +42,7 @@ class Kernel extends BaseKernel
         ContainerConfigurator $container,
         LoaderInterface $loader,
         ContainerBuilder $builder
-    ): void
-    {
+    ): void {
         $configDir = $this->getConfigDir();
 
         $container->import($configDir.'/{packages}/*.php');
@@ -61,30 +57,23 @@ class Kernel extends BaseKernel
 
         $configs = [];
 
-        if(is_dir($this->getProjectDir().'/src/'))
-        {
+        if(is_dir($this->getProjectDir().'/src/')) {
             $srcConfigs = $this->searchResources($projectDir.'/src/');
 
-            if($srcConfigs)
-            {
+            if($srcConfigs) {
                 $configs = array_merge($configs, $srcConfigs);
             }
         }
 
-        if($configs)
-        {
-            foreach($configs as $module)
-            {
-                foreach(new DirectoryIterator($module) as $config)
-                {
-                    if($config->isDot())
-                    {
+        if($configs) {
+            foreach($configs as $module) {
+                foreach(new DirectoryIterator($module) as $config) {
+                    if($config->isDot()) {
                         continue;
                     }
 
                     // Подключаем все конфиги, кроме routes.php
-                    if($config->isFile() && $config->getFilename() !== 'routes.php')
-                    {
+                    if($config->isFile() && $config->getFilename() !== 'routes.php') {
                         $container->import($config->getPathname());
                     }
                 }
@@ -92,8 +81,7 @@ class Kernel extends BaseKernel
         }
 
         /** Импортируем конфиги модулей */
-        if(is_dir($configDir.'/packages/baks-dev'))
-        {
+        if(is_dir($configDir.'/packages/baks-dev')) {
             $container->import($configDir.'/packages/baks-dev/*/*.php');
         }
     }
@@ -109,24 +97,19 @@ class Kernel extends BaseKernel
         /** Рекурсивно подключаем конфиги в директории src */
         $configs = [];
 
-        if(is_dir($this->getProjectDir().'/src/'))
-        {
+        if(is_dir($this->getProjectDir().'/src/')) {
             $srcConfigs = $this->searchResources($this->getProjectDir().'/src/');
 
-            if($srcConfigs)
-            {
+            if($srcConfigs) {
                 $configs = array_merge($configs, $srcConfigs);
             }
         }
 
-        if($configs)
-        {
-            foreach($configs as $module)
-            {
+        if($configs) {
+            foreach($configs as $module) {
                 $route = $module.'/routes.php';
 
-                if(is_file($route))
-                {
+                if(is_file($route)) {
                     $routes->import($route);
                 }
             }
@@ -134,13 +117,11 @@ class Kernel extends BaseKernel
 
 
         /** Импортируем роутинг модулей  */
-        if(is_dir($configDir.'/routes/baks-dev'))
-        {
+        if(is_dir($configDir.'/routes/baks-dev')) {
             $routes->import($configDir.'/routes/baks-dev/*/*.php');
         }
 
-        if(false !== ($fileName = (new ReflectionObject($this))->getFileName()))
-        {
+        if(false !== ($fileName = (new ReflectionObject($this))->getFileName())) {
             $routes->import($fileName, 'attribute');
         }
     }
@@ -158,8 +139,7 @@ class Kernel extends BaseKernel
 
     public function getCacheDir(): string
     {
-        if(isset($_SERVER['APP_CACHE_DIR']))
-        {
+        if(isset($_SERVER['APP_CACHE_DIR'])) {
             return $_SERVER['APP_CACHE_DIR'].'/'.$this->environment;
         }
 
@@ -168,8 +148,7 @@ class Kernel extends BaseKernel
 
     public function getBuildDir(): string
     {
-        if(isset($_SERVER['APP_BUILD_DIR']))
-        {
+        if(isset($_SERVER['APP_BUILD_DIR'])) {
             return $_SERVER['APP_BUILD_DIR'].'/'.$this->environment;
         }
 
@@ -184,10 +163,8 @@ class Kernel extends BaseKernel
     public function registerBundles(): iterable
     {
         $contents = require $this->getBundlesPath();
-        foreach($contents as $class => $envs)
-        {
-            if($envs[$this->environment] ?? $envs['all'] ?? false)
-            {
+        foreach($contents as $class => $envs) {
+            if($envs[$this->environment] ?? $envs['all'] ?? false) {
                 yield new $class();
             }
         }
@@ -195,7 +172,7 @@ class Kernel extends BaseKernel
 
     public function registerContainerConfiguration(LoaderInterface $loader): void
     {
-        $loader->load(function(ContainerBuilder $container) use ($loader) {
+        $loader->load(function (ContainerBuilder $container) use ($loader) {
             $container->loadFromExtension('framework', [
                 'router' => [
                     'resource' => 'kernel::loadRoutes',
@@ -205,8 +182,7 @@ class Kernel extends BaseKernel
 
             $kernelClass = str_contains(static::class, "@anonymous\0") ? parent::class : static::class;
 
-            if(!$container->hasDefinition('kernel'))
-            {
+            if(!$container->hasDefinition('kernel')) {
                 $container->register('kernel', $kernelClass)
                     ->addTag('controller.service_arguments')
                     ->setAutoconfigured(true)
@@ -223,8 +199,7 @@ class Kernel extends BaseKernel
             $configureContainer = new ReflectionMethod($this, 'configureContainer');
             $configuratorClass = $configureContainer->getNumberOfParameters() > 0 && ($type = $configureContainer->getParameters()[0]->getType()) instanceof ReflectionNamedType && !$type->isBuiltin() ? $type->getName() : null;
 
-            if($configuratorClass && !is_a(ContainerConfigurator::class, $configuratorClass, true))
-            {
+            if($configuratorClass && !is_a(ContainerConfigurator::class, $configuratorClass, true)) {
                 $configureContainer->getClosure($this)($container, $loader);
 
                 return;
@@ -237,15 +212,13 @@ class Kernel extends BaseKernel
             $instanceof = &Closure::bind(fn &() => $this->instanceof, $kernelLoader, $kernelLoader)();
 
             $valuePreProcessor = AbstractConfigurator::$valuePreProcessor;
-            AbstractConfigurator::$valuePreProcessor = fn($value
+            AbstractConfigurator::$valuePreProcessor = fn (
+                $value
             ) => $this === $value ? new Reference('kernel') : $value;
 
-            try
-            {
+            try {
                 $configureContainer->getClosure($this)(new ContainerConfigurator($container, $kernelLoader, $instanceof, $file, $file, $this->getEnvironment()), $loader, $container);
-            }
-            finally
-            {
+            } finally {
                 $instanceof = [];
                 $kernelLoader->registerAliasesForSinglyImplementedInterfaces();
                 AbstractConfigurator::$valuePreProcessor = $valuePreProcessor;
@@ -269,16 +242,12 @@ class Kernel extends BaseKernel
         $configureRoutes = new ReflectionMethod($this, 'configureRoutes');
         $configureRoutes->getClosure($this)(new RoutingConfigurator($collection, $kernelLoader, $file, $file, $this->getEnvironment()));
 
-        foreach($collection as $route)
-        {
+        foreach($collection as $route) {
             $controller = $route->getDefault('_controller');
 
-            if(is_array($controller) && [0, 1] === array_keys($controller) && $this === $controller[0])
-            {
+            if(is_array($controller) && [0, 1] === array_keys($controller) && $this === $controller[0]) {
                 $route->setDefault('_controller', ['kernel', $controller[1]]);
-            }
-            elseif($controller instanceof Closure && $this === ($r = new ReflectionFunction($controller))->getClosureThis() && !$r->isAnonymous())
-            {
+            } elseif($controller instanceof Closure && $this === ($r = new ReflectionFunction($controller))->getClosureThis() && !$r->isAnonymous()) {
                 $route->setDefault('_controller', ['kernel', $r->name]);
             }
         }
@@ -301,15 +270,12 @@ class Kernel extends BaseKernel
     {
         $configs = null;
 
-        foreach(new DirectoryIterator($path) as $module)
-        {
-            if($module->isDot() || !$module->isDir())
-            {
+        foreach(new DirectoryIterator($path) as $module) {
+            if($module->isDot() || !$module->isDir()) {
                 continue;
             }
 
-            if(is_dir($module->getRealPath().'/Resources/config'))
-            {
+            if(is_dir($module->getRealPath().'/Resources/config')) {
                 $configs[] = $module->getRealPath().'/Resources/config';
 
                 continue;
@@ -317,8 +283,7 @@ class Kernel extends BaseKernel
 
             $config = self::searchResources($module->getRealPath());
 
-            if($config !== null)
-            {
+            if($config !== null) {
                 $configs = $configs ? array_merge($configs, $config) : $config;
             }
         }
