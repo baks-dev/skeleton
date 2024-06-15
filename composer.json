@@ -7,12 +7,14 @@
   "prefer-stable": true,
   "require": {
     "php": ">=8.3",
+
     "ext-ctype": "*",
     "ext-iconv": "*",
     "ext-curl": "*",
     "ext-dom": "*",
     "ext-exif": "*",
     "ext-gd": "*",
+    "ext-redis": "*",
     "ext-openssl": "*",
     "ext-sockets": "*",
     "doctrine/dbal": "^4.0",
@@ -27,8 +29,11 @@
     "symfony/yaml": "*",
     "symfony/lock": "*",
     "symfony/form": "*",
-    "symfony/scheduler": "*",
     "symfony/messenger": "*",
+    "symfony/doctrine-messenger": "*",
+    "symfony/redis-messenger": "*",
+    "symfony/scheduler": "*",
+
     "symfony/console": "*",
     "symfony/translation": "*",
     "symfony/twig-bundle": "*",

@@ -11,10 +11,12 @@ return static function (FrameworkConfig $framework)
 
 //    $messenger = $framework->messenger();
 
+    //    $profile = '4ee06b1b-87a2-7490-91be-9abb3b71c0ea'; // Идентификатор профиля пользователя
+    //
 //    $messenger
-//        ->transport('cfe8f287-ef8d-7227-9838-de00b288ee31')
-//        ->dsn('%env(MESSENGER_TRANSPORT_DSN)%')
-//        ->options(['queue_name' => 'turkish'])
+    //        ->transport($profile)
+    //        ->dsn('redis://%env(REDIS_PASSWORD)%@%env(REDIS_HOST)%:%env(REDIS_PORT)%?auto_setup=true')
+    //        ->options(['stream' => $profile])
 //        ->retryStrategy()
 //        ->maxRetries(5)
 //        ->delay(1000)
