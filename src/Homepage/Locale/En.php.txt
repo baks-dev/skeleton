@@ -23,7 +23,7 @@
 
 declare(strict_types=1);
 
-namespace App\Homepage\Locale;
+namespace App\Core\Locale;
 
 use BaksDev\Core\Type\Locale\Locales\LocaleInterface;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;

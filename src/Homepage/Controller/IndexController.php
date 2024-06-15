@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Homepage\Controller;
+namespace App\Core\Controller;
 
 use BaksDev\Core\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Attribute\Route;
 #[AsController]
 class IndexController extends AbstractController
 {
-    #[Route('/', name: 'homepage.index')]
+    #[Route('/', name: 'user.homepage')]
     public function index(): Response
     {
         return $this->render([

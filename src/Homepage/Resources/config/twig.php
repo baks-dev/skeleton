@@ -31,6 +31,6 @@ return static function(TwigConfig $twig) {
 
     $twig->path(
         $PATH.'Resources/view',
-        'homepage'
+        'core'
     );
 };

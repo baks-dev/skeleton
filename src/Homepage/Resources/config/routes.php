@@ -8,6 +8,6 @@ return static function(RoutingConfigurator $routes) {
 
     $routes->import($PATH.'/Controller', 'attribute')
         ->prefix(\BaksDev\Core\Type\Locale\Locale::routes())
-        ->namePrefix('homepage:');
+        ->namePrefix('core:');
 
 };
