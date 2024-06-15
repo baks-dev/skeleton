@@ -19,8 +19,8 @@ return (new PhpCsFixer\Config())
             'functions_opening_brace' => 'next_line_unless_newline_at_signature_end'
         ],
         'class_definition' => [
-            'inline_constructor_arguments' => false,
-            'space_before_parenthesis' => true,
+            'inline_constructor_arguments' => false, // handled by method_argument_space fixer
+            'space_before_parenthesis' => true, // defined in PSR12 ¶8. Anonymous Classes
         ],
         'compact_nullable_type_declaration' => true,
         'declare_equal_normalize' => true,
@@ -52,5 +52,6 @@ return (new PhpCsFixer\Config())
             'only_dec_inc' => true,
         ],
         'visibility_required' => true,
+        'control_structure_continuation_position' => ['position' => 'next_line']
     ])
     ->setFinder($finder);
