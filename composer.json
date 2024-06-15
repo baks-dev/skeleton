@@ -54,7 +54,13 @@
     "symfony/validator": "*",
     "symfony/rate-limiter": "*",
     "symfony/expression-language": "*",
-    "symfony/uid": "*"
+    "symfony/uid": "*",
+    "symfony/security-csrf": "*",
+    "symfony/twig-pack": "*",
+    "twig/intl-extra": "*",
+    "twig/extra-bundle": "*",
+    "symfony/intl": "*",
+    "symfony/process": "*"
 
   },
   "flex-require": {
@@ -62,7 +68,12 @@
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
-    "phpunit/phpunit": "9.6"
+    "phpunit/phpunit": "9.6",
+    "symfony/profiler-pack": "*",
+    "symfony/var-dumper": "*",
+    "symfony/debug-bundle": "*",
+    "symfony/debug-pack": "*"
+
   },
   "config": {
     "allow-plugins": {
