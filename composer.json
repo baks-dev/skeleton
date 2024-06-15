@@ -24,6 +24,7 @@
     "baks-dev/users-profile-group": "^7.1",
     "baks-dev/users-profile-type": "^7.1",
     "baks-dev/users-profile-user": "^7.1",
+    "baks-dev/auth-email": "^7.1",
     "symfony/flex": "^2"
   },
   "flex-require": {
