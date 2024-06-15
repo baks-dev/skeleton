@@ -4,7 +4,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Symfony\Config\DoctrineConfig;
 
-return static function (DoctrineConfig $doctrine) {
+return static function(DoctrineConfig $doctrine) {
 
 
     // Пример подключения Doctrine Custom Type

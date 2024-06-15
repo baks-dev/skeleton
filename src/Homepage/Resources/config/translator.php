@@ -26,7 +26,7 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 use BaksDev\Field\Tire\BaksDevFieldTireBundle;
 use Symfony\Config\FrameworkConfig;
 
-return static function (FrameworkConfig $config) {
+return static function(FrameworkConfig $config) {
 
     $PATH = substr(__DIR__, 0, strpos(__DIR__, "Resources"));
 

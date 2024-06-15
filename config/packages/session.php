@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler
 use Symfony\Config\FrameworkConfig;
 
 
-return static function (ContainerConfigurator $container, FrameworkConfig $framework) {
+return static function(ContainerConfigurator $container, FrameworkConfig $framework) {
 
     /*$services = $container->services();
 

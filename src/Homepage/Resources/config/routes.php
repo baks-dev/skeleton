@@ -2,7 +2,7 @@
 
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
-return static function (RoutingConfigurator $routes) {
+return static function(RoutingConfigurator $routes) {
 
     $PATH = substr(__DIR__, 0, strpos(__DIR__, "Resources"));
 

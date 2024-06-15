@@ -28,7 +28,7 @@ use Doctrine\Common\Cache\CacheProvider;
 use Symfony\Component\Cache\Adapter\ApcuAdapter;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
-return static function (ContainerConfigurator $configurator) {
+return static function(ContainerConfigurator $configurator) {
 
     /** Часовой пояс  */
     $configurator->parameters()->set('timezone', 'Europe/Moscow');

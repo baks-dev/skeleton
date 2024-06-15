@@ -7,7 +7,7 @@ use App\Core\Lock\RedisLock;
 use BaksDev\Core\Cache\AppCacheInterface;
 use BaksDev\Core\Lock\AppLockInterface;
 
-return static function (ContainerConfigurator $configurator): void {
+return static function(ContainerConfigurator $configurator): void {
 
     $services = $configurator
         ->services()

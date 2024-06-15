@@ -8,13 +8,8 @@ use Monolog\Processor\WebProcessor;
 use Symfony\Config\MonologConfig;
 
 return static function(MonologConfig $config, ContainerConfigurator $configurator): void {
+
     $services = $configurator->services();
-
-    /*
-
-        tail -f /var/log/name.log
-    */
-
 
     $services->set(WebProcessor::class)->tag('monolog.processor');
 

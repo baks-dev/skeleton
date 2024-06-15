@@ -10,8 +10,7 @@ return static function(DoctrineConfig $doctrine) {
         ->dbal()
         ->connection('default', ['url' => '%env(resolve:DATABASE_URL)%'])
         ->profilingCollectBacktrace('%kernel.debug%')
-        ->useSavepoints(true)
-    ;
+        ->useSavepoints(true);
 
     $doctrine->orm()
         ->autoGenerateProxyClasses(true);
