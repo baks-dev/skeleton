@@ -33,7 +33,6 @@
 
     "symfony/flex": "^2",
 
-
     "symfony/dotenv": "*",
     "symfony/framework-bundle": "*",
     "symfony/runtime": "*",
