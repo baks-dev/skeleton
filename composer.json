@@ -53,7 +53,8 @@
     "symfony/monolog-bundle": "*",
     "symfony/validator": "*",
     "symfony/rate-limiter": "*",
-    "symfony/expression-language": "*"
+    "symfony/expression-language": "*",
+    "symfony/uid": "*"
 
   },
   "flex-require": {
