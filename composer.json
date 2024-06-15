@@ -108,10 +108,6 @@
       "allow-contrib": false,
       "require": "7.1.*",
 
-      "symfony/framework-bundle": {
-        "disable-recipe": true
-      },
-
       "endpoint": [
         "https://api.github.com/repos/baks-dev/recipes/contents/index.json",
         "flex://defaults"
