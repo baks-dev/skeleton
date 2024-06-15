@@ -100,7 +100,11 @@
   "extra": {
     "symfony": {
       "allow-contrib": false,
-      "require": "7.1.*"
+      "require": "7.1.*",
+      "endpoint": [
+        "https://api.github.com/repos/baks-dev/recipes/contents/index.json",
+        "flex://defaults"
+      ]
     }
   }
 }
