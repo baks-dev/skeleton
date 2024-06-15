@@ -20,6 +20,10 @@
     "doctrine/dbal": "^4.0",
     "doctrine/orm": "^3.2",
     "baks-dev/core": "^7.1",
+    "baks-dev/users-user": "^7.1",
+    "baks-dev/users-profile-group": "^7.1",
+    "baks-dev/users-profile-type": "^7.1",
+    "baks-dev/users-profile-user": "^7.1",
     "symfony/flex": "^2"
   },
   "flex-require": {
