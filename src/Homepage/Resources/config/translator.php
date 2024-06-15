@@ -32,6 +32,6 @@ return static function(FrameworkConfig $config) {
 
     $config
         ->translator()
-        ->paths([$PATH.'/Resources/translations/']);
+        ->paths([$PATH.'Resources/translations/']);
 
 };

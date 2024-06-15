@@ -30,7 +30,7 @@ return static function(TwigConfig $twig) {
     $PATH = substr(__DIR__, 0, strpos(__DIR__, "Resources"));
 
     $twig->path(
-        $PATH.'/view',
+        $PATH.'Resources/view',
         'homepage'
     );
 };

@@ -10,7 +10,7 @@ return static function(DoctrineConfig $doctrine) {
     // Пример подключения Doctrine Custom Type
     // $doctrine->dbal()->type(CustomType::TYPE)->class(CustomType::class);
 
-    $NAMESPACE = 'App\Core\Entity';
+    $NAMESPACE = 'App\Homepage\Entity';
 
     $PATH = substr(__DIR__, 0, strpos(__DIR__, "Resources"));
 
