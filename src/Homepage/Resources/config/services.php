@@ -15,7 +15,7 @@ return static function(ContainerConfigurator $configurator): void {
         ->autowire()
         ->autoconfigure();
 
-    $NAMESPACE = 'App\Core\\';
+    $NAMESPACE = 'App\Homepage\\';
 
     $MODULE = substr(__DIR__, 0, strpos(__DIR__, "Resources"));
 

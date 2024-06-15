@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core\Controller;
+namespace App\Homepage\Controller;
 
 use BaksDev\Core\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
