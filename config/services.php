@@ -30,7 +30,7 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 return static function(ContainerConfigurator $configurator) {
 
-    /** Часовой пояс  */
+    /** Часовой пояс приложения по умолчанию */
     $configurator->parameters()->set('timezone', 'Europe/Moscow');
 
     /** Директория проекта */
