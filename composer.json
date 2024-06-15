@@ -27,6 +27,7 @@
     "baks-dev/auth-email": "^7.1",
     "baks-dev/files-res": "^7.1",
     "baks-dev/files-cdn": "^7.1",
+    "baks-dev/settings-main": "^7.1",
 
     "symfony/flex": "^2",
 
