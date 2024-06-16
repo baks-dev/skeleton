@@ -30,6 +30,7 @@
     "baks-dev/settings-main": "^7.1",
     "baks-dev/reference-color": "^7.1",
     "baks-dev/reference-gender": "^7.1",
+    "baks-dev/field-pack": "^7.1",
 
     "symfony/flex": "^2",
 
