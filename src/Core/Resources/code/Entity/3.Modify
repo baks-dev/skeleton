@@ -37,8 +37,6 @@ interface ${NAME}Interface
 #[ORM\Index(columns: ['action'])]
 class ${NAME} extends EntityEvent
 {
-    public const TABLE = '${table}';
-
     /** ID события */
     #[Assert\NotBlank]
     #[Assert\Uuid]

@@ -19,8 +19,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table(name: '${table}')]
 class ${NAME}
 {
-    public const TABLE = '${table}';
-
     /**
     * Идентификатор сущности
     */

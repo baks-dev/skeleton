@@ -24,18 +24,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 interface ${NAME}Interface
 {
     public function getName() : ?string;
-
-	public function getExt() : ?string;
-
-	public function getCdn() : bool;
 }
 
 #[ORM\Entity]
 #[ORM\Table(name: '${table}')]
 class ${NAME} extends EntityEvent implements UploadEntityInterface
 {
-    public const TABLE = '${table}';
-
     /** Связь на событие */
     #[Assert\NotBlank]
     #[ORM\Id]

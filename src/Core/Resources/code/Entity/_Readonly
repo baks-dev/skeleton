@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 interface ${NAME}Interface
 {
+    public function getName() : ?string;
 }
 
 /* ${NAME} */
@@ -24,8 +25,6 @@ interface ${NAME}Interface
 #[ORM\Table(name: '${table}')]
 class ${NAME} extends EntityReadonly
 {
-    public const TABLE = '${table}';
-
     /**
     * Идентификатор Main
      */

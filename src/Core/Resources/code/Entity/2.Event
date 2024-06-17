@@ -31,8 +31,6 @@ interface ${NAME}Interface
 #[ORM\Table(name: '${table}')]
 class ${NAME} extends EntityEvent
 {
-    public const TABLE = '${table}';
-
     /**
 	* Идентификатор События
 	*/

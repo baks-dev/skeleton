@@ -30,8 +30,6 @@ interface ${NAME}Interface
 #[ORM\Index(columns: ['name'])]
 class ${NAME} extends EntityEvent
 {
-    public const TABLE = '${table}';
-
     /** Связь на событие */
     #[Assert\NotBlank]
     #[Assert\Uuid]
