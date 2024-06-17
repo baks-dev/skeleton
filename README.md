@@ -13,7 +13,7 @@ $ composer create-project baks-dev/skeleton <название-папки-для-
 
 #### Шаблоны php-классов для IDE [PhpStorm](https://github.com/baks-dev/skeleton/tree/master/src/Core/Resources/code):
 
-> File | Settings | Editor | File and Code Templates
+> кликаем комбинацию клавиш Ctrl+Alt+S <sup><sub>(либо File -> Settings)</sup></sub> -> Editor -> File and Code Templates
 > 
 > * кликаем **[+]** <sup><sub>(Create Template)</sup></sub>
 > * присваиваем название шаблону
@@ -23,7 +23,7 @@ $ composer create-project baks-dev/skeleton <название-папки-для-
 #### Применение
 
 > * Выделаем директорию проекта, в которой необходимо добавить класс
-> * кликаем комбинацию клавиш Alt+Insert
+> * кликаем комбинацию клавиш Alt+Insert <sup><sub>(либо клик правой клавиши мыши -> New)</sup></sub>
 > * выбираем из списка п. **PHP Class**
 > * присваиваем название классу и в поле **Template:** выбираем нужный
 
