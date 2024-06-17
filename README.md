@@ -11,6 +11,16 @@ $ composer create-project baks-dev/skeleton <название-папки-для-
 ```
 
 
+#### Шаблоны php-классов для IDE [PhpStorm](https://github.com/baks-dev/skeleton/tree/master/src/Core/Resources/code):
+
+
+> File | Settings | Editor | File and Code Templates
+> 
+> * кликаем **[+]** <small>(Create Template)</small> 
+> * присваиваем название шаблону
+> * копируем код из [шаблона](https://github.com/baks-dev/skeleton/tree/master/src/Core/Resources/code) и вставляем в поле IDE 
+
+
 ## Лицензия ![License](https://img.shields.io/badge/MIT-green)
 
 The MIT License (MIT). Обратитесь к [Файлу лицензии](LICENSE.md) за дополнительной информацией.
