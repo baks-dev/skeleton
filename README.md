@@ -15,7 +15,7 @@ $ composer create-project baks-dev/skeleton <название-папки-для-
 
 > File | Settings | Editor | File and Code Templates
 > 
-> * кликаем **[+]** <small>(Create Template)</small> 
+> * кликаем **[+]** <sup><sub>(Create Template)</sup></sub>
 > * присваиваем название шаблону
 > * копируем код из [шаблона](https://github.com/baks-dev/skeleton/tree/master/src/Core/Resources/code) и вставляем в поле IDE 
 > * сохраняем и закрываем окно настроек
