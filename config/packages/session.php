@@ -19,6 +19,7 @@
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use BaksDev\Core\Services\BaksSessionTtl;
+use Redis;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler;
 use Symfony\Config\FrameworkConfig;
@@ -26,10 +27,10 @@ use Symfony\Config\FrameworkConfig;
 
 return static function(ContainerConfigurator $container, FrameworkConfig $framework) {
 
-    /*$services = $container->services();
+    $services = $container->services();
 
     $services->set('Redis')
-        ->class(\Redis::class)
+        ->class(Redis::class)
         ->call('connect', ['%env(REDIS_HOST)%', '%env(int:REDIS_PORT)%'])
         ->call('auth', ['%env(REDIS_PASSWORD)%'])
     ;
@@ -52,5 +53,5 @@ return static function(ContainerConfigurator $container, FrameworkConfig $framew
         ->handlerId(RedisSessionHandler::class)
         ->cookieSecure(true)
         ->cookieSamesite(Cookie::SAMESITE_STRICT)
-    ;*/
+    ;
 };
