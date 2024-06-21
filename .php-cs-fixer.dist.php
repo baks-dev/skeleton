@@ -10,6 +10,7 @@ return (new PhpCsFixer\Config())
         'binary_operator_spaces' => [
             'default' => 'at_least_single_space',
         ],
+        'single_line_empty_body' => true,
         'blank_line_after_opening_tag' => true,
         'blank_line_between_import_groups' => true,
         'blank_lines_before_namespace' => true,
