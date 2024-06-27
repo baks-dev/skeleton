@@ -26,20 +26,12 @@ interface ${NAME}Interface
 
 final class ${NAME} implements ${NAME}Interface
 {
-    private PaginatorInterface ${DS}paginator;
-
-    private DBALQueryBuilder ${DS}DBALQueryBuilder;
-
     private ?SearchDTO ${DS}search = null;
 
     public function __construct(
-        DBALQueryBuilder ${DS}DBALQueryBuilder,
-        PaginatorInterface ${DS}paginator,
-    )
-    {
-        ${DS}this->paginator = ${DS}paginator;
-        ${DS}this->DBALQueryBuilder = ${DS}DBALQueryBuilder;
-    }
+        private readonly DBALQueryBuilder ${DS}DBALQueryBuilder,
+        private readonly PaginatorInterface ${DS}paginator,
+    ) {}
 
     public function search(SearchDTO ${DS}search): self
     {

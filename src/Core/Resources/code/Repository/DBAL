@@ -18,15 +18,7 @@ interface ${interface}Interface
 
 final class ${NAME} implements ${interface}Interface
 {
-    private DBALQueryBuilder ${DS}DBALQueryBuilder;
-
-    public function __construct(
-        DBALQueryBuilder ${DS}DBALQueryBuilder,
-    )
-    {
-        ${DS}this->DBALQueryBuilder = ${DS}DBALQueryBuilder;
-    }
-
+    public function __construct(private readonly DBALQueryBuilder ${DS}DBALQueryBuilder){}
 
     public function findAll${NAME}() : array|bool
     {

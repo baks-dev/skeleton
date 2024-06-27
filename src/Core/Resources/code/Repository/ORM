@@ -18,11 +18,7 @@ interface ${interface}Interface
 
 final class ${NAME} implements ${interface}Interface
 {
-	private ORMQueryBuilder ${DS}ORMQueryBuilder;
-
-    public function __construct(ORMQueryBuilder ${DS}ORMQueryBuilder) {
-        ${DS}this->ORMQueryBuilder = ${DS}ORMQueryBuilder;
-    }
+    public function __construct(private readonly ORMQueryBuilder ${DS}ORMQueryBuilder) {}
 
     public function get()
     {
