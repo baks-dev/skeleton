@@ -14,24 +14,24 @@ final class ${NAME}
     /**
      * Идентификатор
      */
-    private ${CONTEXT} $id;
+    private ${CONTEXT} ${DS}id;
 
     /**
      * Идентификатор события
      */
-    private ${CONTEXT}EventUid $event;
+    private ${CONTEXT}EventUid ${DS}event;
 
     /**
      * Идентификатор предыдущего события
      */
-    private ?${CONTEXT}EventUid $last;
+    private ?${CONTEXT}EventUid ${DS}last;
 
 
-    public function __construct(${CONTEXT} $id, ${CONTEXT}EventUid $event, ?${CONTEXT}EventUid $last = null)
+    public function __construct(${CONTEXT} ${DS}id, ${CONTEXT}EventUid ${DS}event, ?${CONTEXT}EventUid ${DS}last = null)
     {
-        $this->id = $id;
-        $this->event = $event;
-        $this->last = $last;
+        ${DS}this->id = ${DS}id;
+        ${DS}this->event = ${DS}event;
+        ${DS}this->last = ${DS}last;
     }
 
 
@@ -40,7 +40,7 @@ final class ${NAME}
      */
     public function getId(): ${CONTEXT}
     {
-        return $this->id;
+        return ${DS}this->id;
     }
 
 
@@ -49,7 +49,7 @@ final class ${NAME}
      */
     public function getEvent(): ${CONTEXT}EventUid
     {
-        return $this->event;
+        return ${DS}this->event;
     }
 
 
@@ -58,7 +58,7 @@ final class ${NAME}
      */
     public function getLast(): ?${CONTEXT}EventUid
     {
-        return $this->last;
+        return ${DS}this->last;
     }
 
 }
