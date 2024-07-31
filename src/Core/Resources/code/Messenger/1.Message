@@ -14,7 +14,7 @@ final class ${NAME}
     /**
      * Идентификатор
      */
-    private ${CONTEXT} ${DS}id;
+    private ${CONTEXT}Uid ${DS}id;
 
     /**
      * Идентификатор события
@@ -27,7 +27,7 @@ final class ${NAME}
     private ?${CONTEXT}EventUid ${DS}last;
 
 
-    public function __construct(${CONTEXT} ${DS}id, ${CONTEXT}EventUid ${DS}event, ?${CONTEXT}EventUid ${DS}last = null)
+    public function __construct(${CONTEXT}Uid ${DS}id, ${CONTEXT}EventUid ${DS}event, ?${CONTEXT}EventUid ${DS}last = null)
     {
         ${DS}this->id = ${DS}id;
         ${DS}this->event = ${DS}event;
@@ -38,7 +38,7 @@ final class ${NAME}
     /**
      * Идентификатор
      */
-    public function getId(): ${CONTEXT}
+    public function getId(): ${CONTEXT}Uid
     {
         return ${DS}this->id;
     }
