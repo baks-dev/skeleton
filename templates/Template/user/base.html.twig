@@ -6,7 +6,7 @@
     <link rel="icon"
           href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
 
-    <link href="/assets/css/bootstrap.5.3.2.css" rel="stylesheet">
+    <link href="/assets/plugins/bootstrap/5.3.3/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/style.min.css" rel="stylesheet">
 
     {% block stylesheets %}{% endblock %}
@@ -28,11 +28,31 @@
 <script nonce="{{ csp_nonce() }}">
     const $locale = '{{ app.request.getLocale() }}';
     window.lazyLoadOptions = {};
+    window.bootstrap = false;
 </script>
 
-<script nonce="{{ csp_nonce() }}" async src='/assets/js/lazyload.min.js?v={{ version }}'></script>
+
+<script async nonce="{{ csp_nonce() }}" src='/assets/js/lazyload.min.js?v={{ version }}'></script>
+
+<script async
+        nonce="{{ csp_nonce() }}"
+        data-src="/assets/plugins/bootstrap/5.3.3/bootstrap.bundle.min.js"
+        class="lazy"
+></script>
+
+<script async
+        nonce="{{ csp_nonce() }}"
+        data-src='/assets/js/script.min.js?v={{ version }}'
+        class="lazy"
+></script>
+
 
 {% block javascript %}{% endblock %}
+
+{# Блок модального окна #}
+<div class="modal fade" tabindex="-1" id="modal">
+    <div class="modal-dialog modal-dialog-centered"></div>
+</div>
 
 </body>
 
