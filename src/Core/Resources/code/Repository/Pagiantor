@@ -21,7 +21,7 @@ interface ${NAME}Interface
     public function search(SearchDTO ${DS}search): self;
 
     /** Метод возвращает пагинатор ${CONTEXT} */
-    public function ${NAME}Paginator(): PaginatorInterface;
+    public function findPaginator(): PaginatorInterface;
 }
 
 final class ${NAME} implements ${NAME}Interface
@@ -40,7 +40,7 @@ final class ${NAME} implements ${NAME}Interface
     }
 
     /** Метод возвращает пагинатор ${CONTEXT} */
-    public function paginator() : PaginatorInterface
+    public function findPaginator() : PaginatorInterface
     {
         ${DS}dbal = ${DS}this->DBALQueryBuilder->createQueryBuilder(self::class);
 
