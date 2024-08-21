@@ -12,6 +12,7 @@ namespace ${NAMESPACE};
 #set( $SUBMIT = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1_$2").toLowerCase() )
 #set( $ROLE = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1_$2").toUpperCase() )
 #set( $DOMAIN = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1.$2").toLowerCase() )
+#set( $MODULE = $CONTEXT.replaceAll("([a-z])([A-Z]+)", "$1-$2").toLowerCase() )
 
 
 use BaksDev\Core\Controller\AbstractController;
@@ -43,7 +44,7 @@ final class EditController extends AbstractController
 
         // Форма
         ${DS}form = ${DS}this->createForm(${CONTEXT}Form::class, ${DS}${CONTEXT}DTO, [
-            'action' => ${DS}this->generateUrl('${CONTEXT}:admin.newedit.edit', ['id' => ${DS}${CONTEXT}DTO->getEvent()]),
+            'action' => ${DS}this->generateUrl('${MODULE}:admin.newedit.edit', ['id' => ${DS}${CONTEXT}DTO->getEvent()]),
         ]);
         ${DS}form->handleRequest(${DS}request);
 
@@ -59,7 +60,7 @@ final class EditController extends AbstractController
                 ${DS}handle
             );
 
-            return ${DS}handle instanceof ${CONTEXT} ? ${DS}this->redirectToRoute('${CONTEXT}:admin.index') : ${DS}this->redirectToReferer();
+            return ${DS}handle instanceof ${CONTEXT} ? ${DS}this->redirectToRoute('${MODULE}:admin.index') : ${DS}this->redirectToReferer();
         }
 
         return ${DS}this->render(['form' => ${DS}form->createView()]);
