@@ -14,5 +14,5 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler(priority: 0)]
 final class ${NAME}
 {
-    public function __invoke(${CONTEXT}Message $message): void {}
+    public function __invoke(${CONTEXT}Message ${DS}message): void {}
 }
