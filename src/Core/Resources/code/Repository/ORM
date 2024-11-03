@@ -22,12 +22,12 @@ final class ${NAME} implements ${interface}Interface
 
     public function get()
     {
-        ${DS}qb = ${DS}this->ORMQueryBuilder->createQueryBuilder(self::class);
+        ${DS}orm = ${DS}this->ORMQueryBuilder->createQueryBuilder(self::class);
 
-        //${DS}qb->select('alias');
-        //${DS}qb->from(Class::class, 'alias');
-        //${DS}qb->where('*');
+        //${DS}orm->select('alias');
+        //${DS}orm->from(Class::class, 'alias');
+        //${DS}orm->where('*');
 
-        return ${DS}qb->getQuery()->getResult();
+        return ${DS}orm->getQuery()->getResult();
     }
 }
