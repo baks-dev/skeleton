@@ -14,24 +14,27 @@ final class ${NAME}
     /**
      * Идентификатор
      */
-    private ${CONTEXT}Uid ${DS}id;
+    private string ${DS}id;
 
     /**
      * Идентификатор события
      */
-    private ${CONTEXT}EventUid ${DS}event;
+    private string ${DS}event;
 
     /**
      * Идентификатор предыдущего события
      */
-    private ?${CONTEXT}EventUid ${DS}last;
+    private ?string ${DS}last;
 
 
-    public function __construct(${CONTEXT}Uid ${DS}id, ${CONTEXT}EventUid ${DS}event, ?${CONTEXT}EventUid ${DS}last = null)
+    public function __construct(
+        ${CONTEXT}Uid|string ${DS}id,
+        ${CONTEXT}EventUid|string ${DS}event,
+        ${CONTEXT}EventUid|string|null ${DS}last = null)
     {
-        ${DS}this->id = ${DS}id;
-        ${DS}this->event = ${DS}event;
-        ${DS}this->last = ${DS}last;
+        ${DS}this->id = (string) ${DS}id;
+        ${DS}this->event = (string) ${DS}event;
+        ${DS}this->last = (string) ${DS}last;
     }
 
 
@@ -40,7 +43,7 @@ final class ${NAME}
      */
     public function getId(): ${CONTEXT}Uid
     {
-        return ${DS}this->id;
+        return new ${CONTEXT}Uid(${DS}this->id);
     }
 
 
@@ -49,7 +52,7 @@ final class ${NAME}
      */
     public function getEvent(): ${CONTEXT}EventUid
     {
-        return ${DS}this->event;
+        return new ${CONTEXT}EventUid(${DS}this->event);
     }
 
 
@@ -58,7 +61,7 @@ final class ${NAME}
      */
     public function getLast(): ?${CONTEXT}EventUid
     {
-        return ${DS}this->last;
+        return ${DS}this->last ? new ${CONTEXT}EventUid(${DS}this->last) : null;
     }
 
 }

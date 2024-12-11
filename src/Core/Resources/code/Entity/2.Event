@@ -25,6 +25,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 interface ${NAME}Interface
 {
 	public function getEvent() : ?${NAME}Uid;
+
+	public function setId(${NAME}Uid $id): self;
 }
 
 #[ORM\Entity]

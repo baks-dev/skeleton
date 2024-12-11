@@ -28,4 +28,11 @@ final class ${NAME} implements ${EventClass}Interface {
 		return ${DS}this->id;
 	}
 
+    public function setId(${EventClass}Uid $id): self
+    {
+        ${DS}this->id = $id;
+
+        return $this;
+    }
+
 }

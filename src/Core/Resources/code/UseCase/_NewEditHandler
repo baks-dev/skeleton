@@ -14,27 +14,15 @@ use BaksDev\Core\Entity\AbstractHandler;
 
 final class ${NAME} extends AbstractHandler
 {
-
 	/** @see ${CONTEXT} */
-	public function handle(
-		${ClassName}DTO ${DS}command
-	) : string|${CONTEXT}
+	public function handle(${ClassName}DTO ${DS}command): string|${CONTEXT}
 	{
+	    $this->setCommand(${DS}command);
 
-        /** Валидация DTO  */
-        ${DS}this->validatorCollection->add(${DS}command);
+        // Пример передачи объекта
+        // $this->preEventPersistOrUpdate(new ${CONTEXT}($foo), new ${CONTEXT}Event($bar));
 
-        ${DS}this->main = new ${CONTEXT}();
-        ${DS}this->event = new ${CONTEXT}Event();
-
-        try
-        {
-            ${DS}command->getEvent() ? ${DS}this->preUpdate(${DS}command, true) : ${DS}this->prePersist(${DS}command);
-        }
-        catch(\DomainException ${DS}errorUniqid)
-        {
-            return ${DS}errorUniqid->getMessage();
-        }
+        $this->preEventPersistOrUpdate(${CONTEXT}::class, ${CONTEXT}Event::class);
 
         /** Валидация всех объектов */
         if(${DS}this->validatorCollection->isInvalid())
@@ -42,7 +30,7 @@ final class ${NAME} extends AbstractHandler
             return ${DS}this->validatorCollection->getErrorUniqid();
         }
 
-        ${DS}this->entityManager->flush();
+        ${DS}this->flush();
 
         /* Отправляем сообщение в шину */
         ${DS}this->messageDispatch->dispatch(

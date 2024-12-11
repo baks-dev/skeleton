@@ -20,7 +20,7 @@ final class ${NAME} extends AbstractType
 {
 	public function buildForm(FormBuilderInterface ${DS}builder, array ${DS}options) : void
 	{
-		${DS}builder->add('name', TextType::class, ['required' => false]);
+		// ${DS}builder->add('name', TextType::class, ['required' => false]);
 		
 		/* Сохранить ******************************************************/
 		${DS}builder->add(

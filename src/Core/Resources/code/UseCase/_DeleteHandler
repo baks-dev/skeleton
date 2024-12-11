@@ -16,25 +16,14 @@ final class ${NAME} extends AbstractHandler
 {
 
 	/** @see ${CONTEXT} */
-	public function handle(
-		${ClassName}DTO ${DS}command
-	) : string|${CONTEXT}
+	public function handle(${ClassName}DTO ${DS}command): string|${CONTEXT}
 	{
+	    $this->setCommand($command);
 
-        /** Валидация DTO  */
-        ${DS}this->validatorCollection->add(${DS}command);
+        // Пример передачи объекта
+        // $this->preEventRemove(new ${CONTEXT}($foo), new ${CONTEXT}Event($bar));
 
-        ${DS}this->main = new ${CONTEXT}();
-        ${DS}this->event = new ${CONTEXT}Event();
-
-        try
-        {
-            ${DS}this->preRemove(${DS}command);
-        }
-        catch(\DomainException ${DS}errorUniqid)
-        {
-            return ${DS}errorUniqid->getMessage();
-        }
+        $this->preEventRemove(${CONTEXT}::class, ${CONTEXT}Event::class);
 
         /** Валидация всех объектов */
         if(${DS}this->validatorCollection->isInvalid())
@@ -42,7 +31,7 @@ final class ${NAME} extends AbstractHandler
             return ${DS}this->validatorCollection->getErrorUniqid();
         }
 
-        ${DS}this->entityManager->flush();
+        ${DS}this->flush();
 
         /* Отправляем сообщение в шину */
         ${DS}this->messageDispatch->dispatch(
