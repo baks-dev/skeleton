@@ -15,9 +15,9 @@ use Symfony\Component\Uid\AbstractUid;
 final class ${NAME} extends Uid
 {
 	/** Тестовый идентификатор */
-	public const TEST = '0188a99f-03ce-7df6-8775-19226c67fd66';
+	public const string TEST = '0188a99f-03ce-7df6-8775-19226c67fd66';
 
-    public const TYPE = '${type}';
+    public const string TYPE = '${type}';
 
     private mixed ${DS}attr;
 
