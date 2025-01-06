@@ -1,0 +1,21 @@
+<?php
+#parse("PHP File Header.php")
+
+use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+
+#set( $ALIAS = $CONTEXT.toLowerCase() )
+
+return function(RoutingConfigurator ${DS}routes) {
+
+    //${DS}PATH = substr(__DIR__, 0, strpos(__DIR__, "Resources"));
+    //${DS}PATH = BaksDevBundle::PATH;
+
+    ${DS}routes->import(
+        ${DS}PATH.'Controller',
+        'attribute',
+        false,
+        ${DS}PATH.implode(DIRECTORY_SEPARATOR, ['Controller', '**', '*Test.php'])
+    )
+        ->prefix(\BaksDev\Core\Type\Locale\Locale::routes())
+        ->namePrefix('${ALIAS}:');
+};

@@ -1,0 +1,17 @@
+<?php
+#parse("PHP File Header.php")
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+use BaksDev\Support\BaksDevSupportBundle;
+use Symfony\Config\FrameworkConfig;
+
+return static function(FrameworkConfig ${DS}config) {
+
+    //${DS}PATH = substr(__DIR__, 0, strpos(__DIR__, "Resources"));
+    //${DS}PATH = BaksDev...Bundle::PATH;
+
+    ${DS}config
+        ->translator()
+        ->paths([${DS}PATH.implode(DIRECTORY_SEPARATOR, ['Resources', 'translations', ''])]);
+};

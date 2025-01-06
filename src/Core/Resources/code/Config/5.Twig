@@ -1,0 +1,19 @@
+<?php
+#parse("PHP File Header.php")
+
+#set( $ALIAS = $CONTEXT.toLowerCase() )
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+use Symfony\Config\TwigConfig;
+
+return static function(TwigConfig ${DS}twig) {
+
+    //${DS}PATH = substr(__DIR__, 0, strpos(__DIR__, "Resources"));
+    //${DS}PATH = BaksDev...Bundle::PATH;
+
+    ${DS}twig->path(
+${DS}PATH.implode(DIRECTORY_SEPARATOR, ['Resources', 'view', '']),
+'${ALIAS}'
+);
+};

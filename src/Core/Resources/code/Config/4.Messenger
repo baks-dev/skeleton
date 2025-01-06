@@ -1,0 +1,32 @@
+<?php
+#parse("PHP File Header.php")
+
+#set( $ALIAS = $CONTEXT.toLowerCase() )
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+use Symfony\Config\FrameworkConfig;
+
+return static function(FrameworkConfig ${DS}framework) {
+
+    /** Транспорт отправки сообщений */
+    ${DS}messenger = ${DS}framework->messenger();
+
+    ${DS}messenger->transport('${ALIAS}')
+        ->dsn('redis://%env(REDIS_PASSWORD)%@%env(REDIS_HOST)%:%env(REDIS_PORT)%?auto_setup=true')
+        ->options(['stream' => '${ALIAS}'])
+        ->failureTransport('failed-${ALIAS}')
+        ->retryStrategy()
+        ->maxRetries(3)
+        ->delay(1000)
+        ->maxDelay(0)
+        ->multiplier(3) // увеличиваем задержку перед каждой повторной попыткой
+        ->service(null);
+
+    ${DS}failure = ${DS}framework->messenger();
+
+    ${DS}failure->transport('failed-${ALIAS}')
+        ->dsn('%env(MESSENGER_TRANSPORT_DSN)%')
+        ->options(['queue_name' => 'failed-${ALIAS}']);
+
+};

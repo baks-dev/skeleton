@@ -1,0 +1,28 @@
+<?php
+#parse("PHP File Header.php")
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+return static function (ContainerConfigurator ${DS}configurator): void {
+
+    ${DS}services = ${DS}configurator
+        ->services()
+        ->defaults()
+        ->autowire()
+        ->autoconfigure();
+
+    //${DS}NAMESPACE = 'App\${CONTEXT}\\';
+    //${DS}PATH = substr(__DIR__, 0, strpos(__DIR__, "Resources"));
+
+    //${DS}NAMESPACE = BaksDev${CONTEXT}Bundle::NAMESPACE;
+    //${DS}PATH = BaksDev${CONTEXT}Bundle::PATH;
+
+    ${DS}services->load(${DS}NAMESPACE, ${DS}PATH)
+        ->exclude([
+            ${DS}PATH.'{Entity,Resources,Type}',
+            ${DS}PATH.'**'.DIRECTORY_SEPARATOR.'*Message.php',
+            ${DS}PATH.'**'.DIRECTORY_SEPARATOR.'*DTO.php',
+            ${DS}PATH.'**'.DIRECTORY_SEPARATOR.'*Test.php',
+        ]);
+
+};

@@ -1,0 +1,29 @@
+<?php
+#parse("PHP File Header.php")
+
+namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+use Symfony\Config\DoctrineConfig;
+
+#set( $ALIAS = $CONTEXT.toLowerCase() )
+
+return static function(DoctrineConfig ${DS}doctrine): void {
+
+    //${DS}doctrine->dbal()->type(...Uid::TYPE)->class(...Type::class);
+
+    ${DS}emDefault = ${DS}doctrine->orm()->entityManager('default')->autoMapping(true);
+
+    //${DS}NAMESPACE = 'App\....\\';
+    //${DS}PATH = substr(__DIR__, 0, strpos(__DIR__, "Resources"));
+
+    //${DS}NAMESPACE = BaksDevBundle::NAMESPACE;
+    //${DS}PATH = BaksDevBundle::PATH;
+
+    ${DS}emDefault
+        ->mapping('${ALIAS}')
+        ->type('attribute')
+        ->dir(${DS}PATH.'Entity')
+        ->isBundle(false)
+        ->prefix(${DS}NAMESPACE.'\\Entity')
+        ->alias('${ALIAS}');
+};
