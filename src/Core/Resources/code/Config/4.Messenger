@@ -20,7 +20,19 @@ return static function(FrameworkConfig ${DS}framework) {
         ->maxRetries(3)
         ->delay(1000)
         ->maxDelay(0)
-        ->multiplier(3) // увеличиваем задержку перед каждой повторной попыткой
+        ->multiplier(3)
+        ->service(null);
+
+    ${DS}messenger
+        ->transport('${ALIAS}-low')
+        ->dsn('%env(MESSENGER_TRANSPORT_DSN)%')
+        ->options(['queue_name' => '${ALIAS}'])
+        ->failureTransport('failed-${ALIAS}')
+        ->retryStrategy()
+        ->maxRetries(1)
+        ->delay(1000)
+        ->maxDelay(1)
+        ->multiplier(2)
         ->service(null);
 
     ${DS}failure = ${DS}framework->messenger();
