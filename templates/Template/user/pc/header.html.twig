@@ -19,12 +19,8 @@
                 </svg>
             </a>
 
-            {% if app.user %}
-                <a class="btn btn-sm btn-outline-secondary" href="/admin">Администрирование</a>
-            {% else %}
-                <a class="btn btn-sm btn-outline-secondary" href="/login">Авторизация</a>
-            {% endif %}
-
+            {# МЕНЮ ПОЛЬЗОВТАЕЛЯ #}
+            {{ include(Template('@core:user/'~baks_settings.device~'/includes/user.menu.html.twig')) }}
 
         </div>
     </div>
