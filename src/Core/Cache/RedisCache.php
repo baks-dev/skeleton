@@ -25,7 +25,6 @@ declare(strict_types=1);
 
 namespace App\Core\Cache;
 
-use App\Kernel;
 use BaksDev\Core\Cache\AppCacheInterface;
 use Symfony\Component\Cache\Adapter\AbstractAdapter;
 use Symfony\Component\Cache\Adapter\ApcuAdapter;
@@ -61,9 +60,9 @@ final class RedisCache implements AppCacheInterface
     }
 
     public function init(
-        string $namespace = null,
+        ?string $namespace = null,
         int $defaultLifetime = 86400,
-        MarshallerInterface $marshaller = null
+        ?MarshallerInterface $marshaller = null
     ): CacheInterface
     {
 
