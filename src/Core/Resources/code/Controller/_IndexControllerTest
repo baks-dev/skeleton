@@ -1,0 +1,105 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+#end
+
+use BaksDev\Users\User\Tests\TestUserAccount;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\DependencyInjection\Attribute\When;
+
+#set( $groupName = $NAME.replaceAll("([a-z])([A-Z]+)", "$1-$2").toLowerCase() )
+
+/** @group ${groupName} */
+#[When(env: 'test')]
+final class ${NAME} extends WebTestCase
+{
+    private const string URL = '/';
+
+    private const string ROLE = 'ROLE_';
+
+    /** Доступ по роли */
+    public function testRoleSuccessful(): void
+    {
+        self::ensureKernelShutdown();
+
+        ${DS}client = self::createClient();
+
+        foreach(TestUserAccount::getDevice() as ${DS}device)
+        {
+            ${DS}client->setServerParameter('HTTP_USER_AGENT', ${DS}device);
+            ${DS}usr = TestUserAccount::getModer(self::ROLE);
+
+            ${DS}client->loginUser(${DS}usr, 'user');
+            ${DS}client->request('GET', self::URL);
+
+            self::assertResponseIsSuccessful();
+        }
+
+        self::assertTrue(true);
+    }
+
+    /** Доступ по роли ROLE_ADMIN */
+    public function testRoleAdminSuccessful(): void
+    {
+        self::ensureKernelShutdown();
+
+        ${DS}client = self::createClient();
+
+        foreach(TestUserAccount::getDevice() as ${DS}device)
+        {
+            ${DS}client->setServerParameter('HTTP_USER_AGENT', ${DS}device);
+            ${DS}usr = TestUserAccount::getAdmin();
+
+            ${DS}client->loginUser(${DS}usr, 'user');
+            ${DS}client->request('GET', self::URL);
+
+            self::assertResponseIsSuccessful();
+        }
+
+        self::assertTrue(true);
+    }
+
+    /** Доступ по роли ROLE_USER */
+    public function testRoleUserFiled(): void
+    {
+        self::ensureKernelShutdown();
+
+        ${DS}client = static::createClient();
+
+        foreach(TestUserAccount::getDevice() as ${DS}device)
+        {
+            ${DS}client->setServerParameter('HTTP_USER_AGENT', ${DS}device);
+
+            ${DS}usr = TestUserAccount::getUsr();
+            ${DS}client->loginUser(${DS}usr, 'user');
+            ${DS}client->request('GET', self::URL);
+
+            self::assertResponseStatusCodeSame(403);
+            //self::assertResponseIsSuccessful();
+        }
+
+        self::assertTrue(true);
+    }
+
+    /** Доступ без роли */
+    public function testGuestFiled(): void
+    {
+        self::ensureKernelShutdown();
+        ${DS}client = self::createClient();
+
+        foreach(TestUserAccount::getDevice() as ${DS}device)
+        {
+            ${DS}client->setServerParameter('HTTP_USER_AGENT', ${DS}device);
+            ${DS}client->request('GET', self::URL);
+
+            self::assertResponseStatusCodeSame(401);
+            //self::assertResponseIsSuccessful();
+        }
+
+        self::assertTrue(true);
+    }
+}

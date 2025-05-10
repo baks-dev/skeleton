@@ -1,0 +1,58 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+#end
+
+#set( $groupName = $NAME.replaceAll("([a-z])([A-Z]+)", "$1-$2").toLowerCase() )
+#set( $DEPENDS = "\\" + $NAME.replace("Edit", "New") )
+
+use BaksDev\Core\Doctrine\DBALQueryBuilder;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\DependencyInjection\Attribute\When;
+use ${NAMESPACE}${DEPENDS};
+
+/**
+ * @group ${groupName}
+ *
+ * @depends ${NAMESPACE}${DEPENDS}::class
+ */
+#[When(env: 'test')]
+class ${NAME} extends KernelTestCase
+{
+    public function testUseCase(): void
+    {
+        /** @var ${CONTEXT}CurrentEventInterface ${DS}${CONTEXT}CurrentEvent */
+        ${DS}ManufacturePartCurrentEvent = self::getContainer()->get(${CONTEXT}CurrentEventInterface::class);
+        ${DS}${CONTEXT}Event = ${DS}${CONTEXT}CurrentEvent->findBy${CONTEXT}(${CONTEXT}Uid::TEST);
+        self::assertNotNull(${DS}${CONTEXT}Event);
+
+        /** @see ${CONTEXT}DTO */
+        ${DS}${CONTEXT}DTO = new ${CONTEXT}DTO();
+        ${DS}${CONTEXT}Event->getDto(${DS}${CONTEXT}DTO);
+
+        /** @var ${CONTEXT}Handler ${DS}${CONTEXT}Handler */
+        ${DS}${CONTEXT}Handler = self::getContainer()->get(${CONTEXT}Handler::class);
+        ${DS}handle = ${DS}${CONTEXT}Handler->handle(${DS}${CONTEXT}DTO);
+
+        self::assertTrue((${DS}handle instanceof ${CONTEXT}), ${DS}handle.': Ошибка ${CONTEXT}');
+
+    }
+
+
+    public function testComplete(): void
+    {
+        /** @var ${CONTEXT}CurrentEventInterface ${DS}${CONTEXT}CurrentEvent */
+        ${DS}ManufacturePartCurrentEvent = self::getContainer()->get(${CONTEXT}CurrentEventInterface::class);
+        ${DS}${CONTEXT}Event = ${DS}${CONTEXT}CurrentEvent->findBy${CONTEXT}(${CONTEXT}Uid::TEST);
+        self::assertNotNull(${DS}${CONTEXT}Event);
+
+        /** @see ${CONTEXT}DTO */
+        ${DS}${CONTEXT}DTO = new ${CONTEXT}DTO();
+        ${DS}${CONTEXT}Event->getDto(${DS}${CONTEXT}DTO);
+    }
+}

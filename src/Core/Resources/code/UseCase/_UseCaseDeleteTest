@@ -1,0 +1,94 @@
+<?php
+#parse("PHP File Header.php")
+
+declare(strict_types=1);
+
+#if (${NAMESPACE})
+namespace ${NAMESPACE};
+#end
+
+#set( $groupName = $NAME.replaceAll("([a-z])([A-Z]+)", "$1-$2").toLowerCase() )
+
+#set( $DEPENDS_NEW = "\\" + $NAME.replace("Delete", "New") )
+#set( $DEPENDS_EDIT = "\\" + $NAME.replace("Delete", "Edit") )
+
+#set( $DEPENDS_NAMESPACE = $NAMESPACE.replace("Delete", "NewEdit") )
+
+use BaksDev\Core\Doctrine\DBALQueryBuilder;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\DependencyInjection\Attribute\When;
+use ${DEPENDS_NAMESPACE}${DEPENDS_NEW};
+use ${DEPENDS_NAMESPACE}${DEPENDS_EDIT};
+
+/**
+ * @group ${groupName}
+ *
+ * @depends ${DEPENDS_NAMESPACE}${DEPENDS_NEW}::class
+ * @depends ${DEPENDS_NAMESPACE}${DEPENDS_EDIT}::class
+ */
+#[When(env: 'test')]
+class ${NAME} extends KernelTestCase
+{
+    public function testUseCase(): void
+{
+    /** @var ${CONTEXT}CurrentEventInterface ${DS}${CONTEXT}CurrentEvent */
+        ${DS}${CONTEXT}CurrentEvent = self::getContainer()->get(${CONTEXT}CurrentEventInterface::class);
+        ${DS}${CONTEXT}Event = ${DS}${CONTEXT}CurrentEvent->findBy${CONTEXT}(${CONTEXT}Uid::TEST);
+        self::assertNotNull(${DS}${CONTEXT}Event);
+
+        /** @see ${CONTEXT}DeleteDTO */
+        ${DS}${CONTEXT}DeleteDTO = new ${CONTEXT}DeleteDTO();
+        ${DS}${CONTEXT}Event->getDto(${DS}${CONTEXT}DeleteDTO);
+
+        /** @var ${CONTEXT}Handler ${DS}${CONTEXT}Handler */
+        ${DS}${CONTEXT}DeleteHandler = self::getContainer()->get(${CONTEXT}DeleteHandler::class);
+        ${DS}handle = ${DS}${CONTEXT}DeleteHandler->handle(${DS}${CONTEXT}DeleteDTO);
+
+        self::assertTrue((${DS}handle instanceof ${CONTEXT}), ${DS}handle.': Ошибка ${CONTEXT}');
+
+    }
+
+
+    public function testComplete(): void
+{
+    /** @var DBALQueryBuilder ${DS}dbal */
+    ${DS}dbal = self::getContainer()->get(DBALQueryBuilder::class);
+
+        ${DS}dbal->createQueryBuilder(self::class);
+
+        ${DS}dbal->from(${CONTEXT}::class)
+    ->where('id = :id')
+    ->setParameter('id', ${CONTEXT}Uid::TEST);
+
+        self::assertFalse(${DS}dbal->fetchExist());
+
+    }
+
+    public static function tearDownAfterClass(): void
+{
+    /** @var EntityManagerInterface ${DS}em */
+    ${DS}em = self::getContainer()->get(EntityManagerInterface::class);
+
+        ${DS}main = ${DS}em->getRepository(${CONTEXT}::class)
+    ->findOneBy(['id' => ${CONTEXT}Uid::TEST]);
+
+        if(${DS}main)
+        {
+            ${DS}em->remove(${DS}main);
+        }
+
+
+        ${DS}event = ${DS}em->getRepository(${CONTEXT}Event::class)
+            ->findBy(['main' => ${CONTEXT}Uid::TEST]);
+
+        foreach(${DS}event as ${DS}remove)
+        {
+            ${DS}em->remove(${DS}remove);
+        }
+
+        ${DS}em->flush();
+        ${DS}em->clear();
+    }
+}
+
