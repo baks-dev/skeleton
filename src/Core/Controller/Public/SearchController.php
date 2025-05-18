@@ -21,7 +21,7 @@
  *  THE SOFTWARE.
  */
 
-namespace App\Core\Controller\User;
+namespace App\Core\Controller\Public;
 
 use BaksDev\Core\Controller\AbstractController;
 use BaksDev\Core\Form\Search\SearchDTO;
