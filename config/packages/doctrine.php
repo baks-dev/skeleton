@@ -8,7 +8,13 @@ return static function(DoctrineConfig $doctrine) {
 
     $doctrine
         ->dbal()
-        ->connection('default', ['url' => '%env(resolve:DATABASE_URL)%'])
+        ->connection('default', ['url' => '%env(resolve:DATABASE_URL)%']);
+
+
+    $doctrine
+        ->dbal()
+        ->defaultConnection('default')
+        ->connection('default')
         ->profilingCollectBacktrace('%kernel.debug%')
         ->useSavepoints(true);
 
