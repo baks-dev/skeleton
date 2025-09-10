@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2023.  Baks.dev <admin@baks.dev>
+ *  Copyright 2024.  Baks.dev <admin@baks.dev>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -21,30 +21,35 @@
  *  THE SOFTWARE.
  */
 
-namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+namespace Core\Controller\Public;
 
-use Symfony\Config\FrameworkConfig;
+use BaksDev\Core\Controller\AbstractController;
+use BaksDev\Core\Form\Search\SearchDTO;
+use BaksDev\Core\Form\Search\SearchForm;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\AsController;
+use Symfony\Component\Routing\Annotation\Route;
 
-return static function(FrameworkConfig $framework) {
+#[AsController]
+final class SearchController extends AbstractController
+{
+    #[Route('/search', name: 'search', methods: ['POST', 'GET'])]
+    public function search(
+        Request $request
+    ): Response {
 
-    $messenger = $framework->messenger();
+        // Поиск
+        $search = new SearchDTO($request);
+        $searchForm = $this->createForm(SearchForm::class, $search, [
+            'action' => $this->generateUrl('core:search'),
+        ]);
 
-    $messenger
-        ->transport('homepage')
-        ->dsn('redis://%env(REDIS_PASSWORD)%@%env(REDIS_HOST)%:%env(REDIS_PORT)%?auto_setup=true')
-        ->options(['stream' => 'homepage'])
-        ->failureTransport('failed-homepage')
-        ->retryStrategy()
-        ->maxRetries(3)
-        ->delay(1000)
-        ->maxDelay(0)
-        ->multiplier(3)
-        ->service(null);
+        $searchForm->handleRequest($request);
 
-    $failure = $framework->messenger();
+        return $this->render([
+            'search' => $searchForm->createView()
+        ]);
+    }
 
-    $failure->transport('failed-homepage')
-        ->dsn('%env(MESSENGER_TRANSPORT_DSN)%')
-        ->options(['queue_name' => 'failed-homepage']);
-
-};
+}

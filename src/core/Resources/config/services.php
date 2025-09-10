@@ -2,10 +2,9 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
-use App\Core\Cache\RedisCache;
-use App\Core\Lock\RedisLock;
 use BaksDev\Core\Cache\AppCacheInterface;
 use BaksDev\Core\Lock\AppLockInterface;
+use Core\Lock\RedisLock;
 
 return static function(ContainerConfigurator $configurator): void {
 
@@ -15,7 +14,7 @@ return static function(ContainerConfigurator $configurator): void {
         ->autowire()
         ->autoconfigure();
 
-    $NAMESPACE = 'App\Core\\';
+    $NAMESPACE = 'Core\\';
 
     $MODULE = substr(__DIR__, 0, strpos(__DIR__, "Resources"));
 

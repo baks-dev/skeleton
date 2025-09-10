@@ -1,6 +1,6 @@
 <?php
 /*
- *  Copyright 2024.  Baks.dev <admin@baks.dev>
+ *  Copyright 2023.  Baks.dev <admin@baks.dev>
  *
  *  Permission is hereby granted, free of charge, to any person obtaining a copy
  *  of this software and associated documentation files (the "Software"), to deal
@@ -21,35 +21,26 @@
  *  THE SOFTWARE.
  */
 
-namespace App\Core\Controller\Public;
+declare(strict_types=1);
 
-use BaksDev\Core\Controller\AbstractController;
-use BaksDev\Core\Form\Search\SearchDTO;
-use BaksDev\Core\Form\Search\SearchForm;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Attribute\AsController;
-use Symfony\Component\Routing\Annotation\Route;
+namespace Core\Locale;
 
-#[AsController]
-final class SearchController extends AbstractController
+use BaksDev\Core\Type\Locale\Locales\LocaleInterface;
+use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
+
+#[AutoconfigureTag('baks.locale')]
+class En implements LocaleInterface
 {
-    #[Route('/search', name: 'search', methods: ['POST', 'GET'])]
-    public function search(
-        Request $request
-    ): Response {
+    public const LOCAL = 'en';
 
-        // Поиск
-        $search = new SearchDTO($request);
-        $searchForm = $this->createForm(SearchForm::class, $search, [
-            'action' => $this->generateUrl('core:search'),
-        ]);
-
-        $searchForm->handleRequest($request);
-
-        return $this->render([
-            'search' => $searchForm->createView()
-        ]);
+    /** Возвращает значение (value) */
+    public function getValue(): string
+    {
+        return self::LOCAL;
     }
 
+    public static function sort(): int
+    {
+        return 200;
+    }
 }

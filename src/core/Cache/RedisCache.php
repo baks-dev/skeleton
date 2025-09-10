@@ -23,13 +23,9 @@
 
 declare(strict_types=1);
 
-namespace App\Core\Cache;
+namespace Core\Cache;
 
 use BaksDev\Core\Cache\AppCacheInterface;
-use Symfony\Component\Cache\Adapter\AbstractAdapter;
-use Symfony\Component\Cache\Adapter\ApcuAdapter;
-use Symfony\Component\Cache\Adapter\ArrayAdapter;
-use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\Adapter\RedisAdapter;
 use Symfony\Component\Cache\Marshaller\MarshallerInterface;
 use Symfony\Component\DependencyInjection\Attribute\Autowire;
@@ -37,50 +33,58 @@ use Symfony\Contracts\Cache\CacheInterface;
 
 final class RedisCache implements AppCacheInterface
 {
-    private bool $forcibly = false;
-
     private string $type = RedisAdapter::class;
 
-    private string $REDIS_HOST;
-    private string $REDIS_PORT;
-    private string $REDIS_PASSWORD;
-    private string $HOST;
+    private bool $restricted = true;
 
     public function __construct(
-        #[Autowire(env: 'HOST')] string $HOST,
-        #[Autowire(env: 'REDIS_HOST')] string $REDIS_HOST,
-        #[Autowire(env: 'REDIS_PORT')] string $REDIS_PORT,
-        #[Autowire(env: 'REDIS_PASSWORD')] string $REDIS_PASSWORD,
-    )
-    {
-        $this->HOST = $HOST;
-        $this->REDIS_HOST = $REDIS_HOST;
-        $this->REDIS_PORT = $REDIS_PORT;
-        $this->REDIS_PASSWORD = $REDIS_PASSWORD;
-    }
+        #[Autowire(env: 'HOST')] private readonly string $HOST,
+
+        #[Autowire(env: 'REDIS_CACHE_HOST')] private readonly string $REDIS_CACHE_HOST,
+        #[Autowire(env: 'REDIS_CACHE_PORT')] private readonly string $REDIS_CACHE_PORT,
+
+        #[Autowire(env: 'REDIS_DEDUPLICATOR_HOST')] private readonly string $REDIS_DEDUPLICATOR_HOST,
+        #[Autowire(env: 'REDIS_DEDUPLICATOR_PORT')] private readonly string $REDIS_DEDUPLICATOR_PORT,
+
+    ) {}
 
     public function init(
-        ?string $namespace = null,
+        string|null $namespace = null,
         int $defaultLifetime = 86400,
-        ?MarshallerInterface $marshaller = null
+        MarshallerInterface|null $marshaller = null
     ): CacheInterface
     {
 
-        $namespace = $namespace ? $this->HOST.'.'.$namespace : $this->HOST;
+        $namespace = $namespace ?: $this->HOST;
+
+        $connect = sprintf(
+            'redis://%s:%s',
+            $this->REDIS_CACHE_HOST,
+            $this->REDIS_CACHE_PORT,
+        );
+
+        if(str_starts_with($namespace, 'deduplicator'))
+        {
+            $connect = sprintf(
+                'redis://%s:%s',
+                $this->REDIS_DEDUPLICATOR_HOST,
+                $this->REDIS_DEDUPLICATOR_PORT,
+            );
+        }
 
         return new RedisAdapter(
-            RedisAdapter::createConnection(
-                sprintf(
-                    'redis://%s@%s:%s',
-                    $this->REDIS_PASSWORD,
-                    $this->REDIS_HOST,
-                    $this->REDIS_PORT
-                )
-            ),
+            RedisAdapter::createConnection($connect),
             $namespace,
             $defaultLifetime,
-            $marshaller
+            $marshaller,
         );
+    }
+
+    /** Сбросить кеш не относящийся к домену */
+    public function notRestricted(): self
+    {
+        $this->restricted = false;
+        return $this;
     }
 
     public function getCacheType(): string
