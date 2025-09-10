@@ -28,6 +28,7 @@
     "baks-dev/settings-main": "*",
     "baks-dev/reference-color": "*",
     "baks-dev/reference-gender": "*",
+    "baks-dev/reference-region": "*",
     "baks-dev/field-pack": "*",
     "baks-dev/menu-admin": "*",
     "doctrine/dbal": "*",
