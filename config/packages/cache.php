@@ -8,17 +8,20 @@ return static function(FrameworkConfig $config) {
 
     /** Конфигурация кеширования в Redis */
 
-    //    $cache = $config->cache();
+    /*
+        Очистить временные файлы старше 1 дня
+        find /tmp -ctime +1 -exec rm -rf {} +
+    */
 
-    //    $cache
-    //        ->app('cache.adapter.redis')
-    //        ->defaultRedisProvider("redis://%env(REDIS_PASSWORD)%@%env(REDIS_HOST)%:%env(REDIS_PORT)%")
-    //    ;
-    //
-    //    $cache
-    //        ->app('cache.adapter.redis')
-    //        ->system('cache.adapter.redis')
-    //    ;
+    $config->cache()
+        ->app('cache.adapter.redis')
+        ->defaultRedisProvider("redis://%env(REDIS_PASSWORD)%@%env(REDIS_HOST)%:%env(REDIS_PORT)%")
+        ->system('cache.adapter.redis');
+
+    $config->cache()
+        ->pool('doctrine.result_cache_pool')
+        ->adapters(['cache.adapter.redis']) // Или filesystem/apcu
+        ->defaultLifetime(3600); // 1 час
 
 
 };

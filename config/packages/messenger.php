@@ -24,5 +24,48 @@ return static function(FrameworkConfig $framework) {
     //        ->service(null);
 
 
+    // Перечисляем все идентификаторы бизнес-профилей
+
+    $profiles = [
+        '13fa3aea-fe51-7888-aac1-701303573bcd',
+    ];
+
+    $messenger = $framework->messenger();
+
+    foreach($profiles as $profile)
+    {
+        $table_name = 'messenger_'.str_replace('-', '_', $profile);
+
+        $messenger
+            ->transport($profile)
+            ->dsn('%env(MESSENGER_TRANSPORT_DSN)%')
+            ->options(['table_name' => $table_name, 'queue_name' => 'high'])
+            ->failureTransport($profile.'-failed')
+            ->retryStrategy()
+            ->maxRetries(3)
+            ->delay(1000)
+            ->maxDelay(1)
+            ->multiplier(3)
+            ->service(null);
+
+        $messenger
+            ->transport($profile.'-low')
+            ->dsn('%env(MESSENGER_TRANSPORT_DSN)%')
+            ->options(['table_name' => $table_name, 'queue_name' => 'low'])
+            ->failureTransport($profile.'-failed')
+            ->retryStrategy()
+            ->maxRetries(3)
+            ->delay(1000)
+            ->maxDelay(1)
+            ->multiplier(3)
+            ->service(null);
+
+        $messenger
+            ->transport($profile.'-failed')
+            ->dsn('%env(MESSENGER_TRANSPORT_DSN)%')
+            ->options(['table_name' => $table_name, 'queue_name' => 'failed']);
+
+    }
+
 };
 

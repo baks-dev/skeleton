@@ -24,6 +24,9 @@
             <directory>src/*/Tests</directory>
             <directory>src/*/*/Tests</directory>
             <directory>src/*/*/*/Tests</directory>
+            <directory>src/*/*/*/*/Tests</directory>
+            <directory>src/*/*/*/*/*/Tests</directory>
+            <directory>src/*/*/*/*/*/*/Tests</directory>
 
             <directory>vendor/baks-dev/*/Tests</directory>
             <directory>vendor/baks-dev/*/*/Tests</directory>

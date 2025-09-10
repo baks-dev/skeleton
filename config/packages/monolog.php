@@ -8,8 +8,8 @@ use Monolog\Processor\WebProcessor;
 use Symfony\Config\MonologConfig;
 
 return static function(MonologConfig $config, ContainerConfigurator $configurator): void {
-
     $services = $configurator->services();
+
 
     $services->set(WebProcessor::class)->tag('monolog.processor');
 
@@ -24,8 +24,9 @@ return static function(MonologConfig $config, ContainerConfigurator $configurato
         ->formatter('monolog.formatter.standard')
         ->type('rotating_file')
         ->maxFiles(10)
-        ->path('%kernel.logs_dir%/%kernel.environment%_request.log')
-        ->level('notice')
+        ->path('%kernel.logs_dir%/request/%kernel.environment%_request.log')
+        ->level('debug')
+        //->level('notice')
         ->channels()->elements(['request']);
 
     /* Критические ошибки приложения */
@@ -35,7 +36,6 @@ return static function(MonologConfig $config, ContainerConfigurator $configurato
         ->path('%kernel.logs_dir%/critical.log')
         ->level('critical')
         ->channels();
-
 
     /**
      * Модульные каналы
@@ -68,10 +68,11 @@ return static function(MonologConfig $config, ContainerConfigurator $configurato
         /* MESSAGE DISPATCH LOGER */
         $services->defaults()->bind('$'.$chanel.'Logger', '@monolog.logger.'.$chanel);
 
-        $config->handler('handler_'.$chanel)
+        $config
+            ->handler('handler_'.$chanel)
             ->type('rotating_file')
-            ->maxFiles(10)
-            ->path('%kernel.logs_dir%/'.$module.'.log')
+            ->maxFiles(30)
+            ->path('%kernel.logs_dir%/'.$module.'/'.$module.'.log')
             ->level('debug')
             ->channels($chanel);
     }

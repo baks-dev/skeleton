@@ -76,8 +76,8 @@
     "symfony/var-dumper": "*",
     "symfony/debug-bundle": "*",
     "symfony/debug-pack": "*",
-    "phpunit/phpunit": "9.6.*",
-    "symfony/web-profiler-bundle": "7.1.*"
+    "phpunit/phpunit": "^11.1",
+    "symfony/web-profiler-bundle": "*"
   },
   "config": {
     "allow-plugins": {
@@ -125,7 +125,7 @@
   "extra": {
     "symfony": {
       "allow-contrib": false,
-      "require": "7.2.*",
+      "require": "7.3.*",
 
       "endpoint": [
         "https://api.github.com/repos/baks-dev/recipes/contents/index.json",

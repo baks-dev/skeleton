@@ -9,7 +9,8 @@ return static function(TwigConfig $config) {
     $config->formThemes(['@core/form/bootstrap_5_layout.html.twig']);
     $config->path('%kernel.project_dir%/templates', 'Template');
 
-    //$config->global('MAPS_YANDEX_API')->value('%env(MAPS_YANDEX_API)%');
+    // раскомментировать в случае подключения модуля геолокации
+    // $config->global('MAPS_YANDEX_API')->value('%env(MAPS_YANDEX_API)%');
 
     $config->global('version')->value('QFxfhSsy');
 

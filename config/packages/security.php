@@ -53,7 +53,7 @@ return static function(SecurityConfig $config) {
     $config->provider('in_memory_users')
         ->memory()
         ->user('admin')
-        ->password('$2y$13$mlMF9.25ivZInO5G3biESexozDAWIAxXSBhyRH6uc5xETx7svZsYW')
+        ->password('<PASSWORD_HASH>') // обновляем на свой дайджест
         ->roles(['ROLE_CDN']);
 
     $config->firewall('main')
